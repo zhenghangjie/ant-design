@@ -1,5 +1,5 @@
 /* eslint jsx-a11y/no-noninteractive-element-interactions: 0 */
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -184,7 +184,9 @@ ${state.sourceCode.replace('mountNode', 'document.getElementById(\'container\')'
     return (
       <section className={codeBoxClass} id={meta.id}>
         <section className="code-box-demo">
-          {this.liveDemo}
+          <StrictMode>
+            {this.liveDemo}
+          </StrictMode>
           {
             style ?
               <style dangerouslySetInnerHTML={{ __html: style }} /> :

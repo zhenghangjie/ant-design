@@ -1,5 +1,6 @@
+import React, { StrictMode } from 'react';
 import glob from 'glob';
-import { render } from 'enzyme';
+import { render, mount } from 'enzyme';
 import MockDate from 'mockdate';
 import moment from 'moment';
 
@@ -14,7 +15,16 @@ export default function demoTest(component, options = {}) {
     testMethod(`renders ${file} correctly`, () => {
       MockDate.set(moment('2016-11-22'));
       const demo = require(`../.${file}`).default; // eslint-disable-line global-require, import/no-dynamic-require
-      const wrapper = render(demo);
+      mount(
+        <StrictMode>
+          {demo}
+        </StrictMode>
+      );
+      const wrapper = render(
+        <StrictMode>
+          {demo}
+        </StrictMode>
+      );
       expect(wrapper).toMatchSnapshot();
       MockDate.reset();
     });
